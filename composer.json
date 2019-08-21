@@ -1,0 +1,23 @@
+{
+    "name": "megaoffice/yii2-client",
+    "description": "Megaoffice RESTful API client",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Megaoffice Corp",
+            "email": "megaofficecorp@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.0"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "megaoffice\\client\\": "src"
+        }
+    }
+}
