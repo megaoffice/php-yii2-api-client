@@ -1,5 +1,6 @@
 <?php
 
+namespace megaoffice\client\src\models;
 
 use yii\db\ActiveRecordInterface;
 
