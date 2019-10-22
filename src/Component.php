@@ -31,6 +31,7 @@ class Component extends \yii\base\Component
         $headers = [
             'X-Api-Key'     => '' .$this->token,
             'Accept'        => 'application/json',
+            'Cache-Control'        => '',
         ];
         if(is_array($condition) && count($condition)>0){
             $condString = '?filter='.json_encode($condition);
