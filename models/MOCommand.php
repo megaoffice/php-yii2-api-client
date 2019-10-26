@@ -1,0 +1,50 @@
+<?php
+
+
+namespace megaoffice\client\models;
+
+
+use GuzzleHttp\Client;
+use yii\base\Component;
+
+class MOCommand extends Component
+{
+    public $moQuery;
+    public $query;
+
+
+    public function queryAll(){
+
+        $client = new Client();
+        $headers = [
+            'X-Api-Key'     => '' .\Yii::$app->megaofficeClient->token,
+            'Accept'        => 'application/json',
+            'Cache-Control'        => '',
+        ];
+        $condition = [];
+
+        $delimiter = '?';
+
+        if($this->moQuery->limit > 0){
+            $limit = $delimiter.'per-page='.intval($this->moQuery->limit);
+            $delimiter = '&';
+        }
+
+
+        if(is_array($condition) && count($condition)>0){
+            $condString = $limit.$delimiter.'filter='.json_encode($condition);
+        }else if(is_string($condition) && strlen($condition) > 0){
+            $condString = $limit.$delimiter.'filter='.$condition;
+        }else{
+            $condString = $limit.$delimiter;
+        }
+        $endpoint = $this->moQuery->modelClass::tableName();
+        $url = \Yii::$app->megaofficeClient->url;
+
+        $response = $client->request('GET', $url .'/'. $endpoint.$condString, [
+            'headers' => $headers,
+        ]);
+        return  json_decode($response->getBody(), true);
+
+    }
+}
