@@ -34,9 +34,9 @@ class Component extends \yii\base\Component
             'Cache-Control'        => '',
         ];
         if(is_array($condition) && count($condition)>0){
-            $condString = '?per-page=100&filter='.json_encode($condition);
+            $condString = '?per-page=500&filter='.json_encode($condition);
         }else if(is_string($condition) && strlen($condition) > 0){
-            $condString = '?per-page=100&filter='.$condition;
+            $condString = '?per-page=500&filter='.$condition;
         }else{
             $condString = '';
         }
