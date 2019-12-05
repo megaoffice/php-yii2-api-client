@@ -108,7 +108,46 @@ class MOActiveRecord extends BaseActiveRecord
      */
     public function insert($runValidation = true, $attributes = null)
     {
-        // TODO: Implement insert() method.
+        if ($runValidation && !$this->validate($attributes)) {
+            Yii::info('Model not inserted due to validation error.', __METHOD__);
+            return false;
+        }
+
+        if (!$this->beforeSave(true)) {
+            return false;
+        }
+        $values = $this->getDirtyAttributes($attributes);
+
+
+
+        $record = Yii::$app->megaofficeClient->insert(static::tableName(), $values);
+
+//        if (($primaryKeys = static::getDb()->schema->insert(static::tableName(), $values)) === false) {
+//            return false;
+//        }
+//        foreach ($primaryKeys as $name => $value) {
+//            $id = static::getTableSchema()->columns[$name]->phpTypecast($value);
+//            $this->setAttribute($name, $id);
+//            $values[$name] = $id;
+//        }
+        if($record){
+            $this->setAttribute('id', $record['id']);
+
+            $changedAttributes = array_fill_keys(array_keys($values), null);
+            $this->setOldAttributes($values);
+            $this->afterSave(true, $changedAttributes);
+
+            return true;
+
+        }
+
+        return false;
+
+    }
+
+    public function getPrimaryKey($asArray = false)
+    {
+        return $this->id;
     }
 
     /**

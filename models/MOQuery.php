@@ -112,7 +112,7 @@ class MOQuery extends Component implements QueryInterface
      */
     public function one($db = null)
     {
-        // TODO: Implement one() method.
+        return $this->createCommand($db)->queryOne();
     }
 
     /**

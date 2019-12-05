@@ -47,4 +47,42 @@ class MOCommand extends Component
         return  json_decode($response->getBody(), true);
 
     }
+
+    public function queryOne(){
+
+        $client = new Client();
+        $headers = [
+            'X-Api-Key'     => '' .\Yii::$app->megaofficeClient->token,
+            'Accept'        => 'application/json',
+            'Cache-Control'        => '',
+        ];
+        $condition = [];
+
+        $delimiter = '&';
+
+        $limit = '?per-page=1';
+
+        if(is_array($condition) && count($condition)>0){
+            $condString = $limit.$delimiter.'filter='.json_encode($condition);
+        }else if(is_string($condition) && strlen($condition) > 0){
+            $condString = $limit.$delimiter.'filter='.$condition;
+        }else{
+            $condString = $limit.$delimiter;
+        }
+        $endpoint = $this->moQuery->modelClass::tableName();
+        $url = \Yii::$app->megaofficeClient->url;
+
+        $response = $client->request('GET', $url .'/'. $endpoint.$condString, [
+            'headers' => $headers,
+        ]);
+        $parsed = json_decode($response->getBody());
+
+        if(is_array($parsed) && count($parsed) > 0){
+            return  $parsed[0];
+        }
+        return null;
+
+    }
+
+
 }
