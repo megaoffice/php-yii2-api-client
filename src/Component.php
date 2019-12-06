@@ -73,12 +73,12 @@ class Component extends \yii\base\Component
                 'form_params' => $values,
             ]);
             $res = [
-                'status' => 'error',
+                'status' => 'ok',
                 'response' => json_decode($response->getBody(), true)
             ];
         }catch (RequestException $e){
             $res = [
-                'status' => 'ok',
+                'status' => 'error',
                 'response' => json_decode($e->getResponse()->getBody(), true)
             ];
         }
