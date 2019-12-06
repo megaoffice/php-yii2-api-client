@@ -11,7 +11,7 @@ class MOClients extends MOActiveRecord
     public function attributes()
     {
         return [
-            'id', 'type', 'status', 'source',  'options'
+            'id', 'type', 'status', 'source',  'options', 'email', 'phone',
         ];
     }
 

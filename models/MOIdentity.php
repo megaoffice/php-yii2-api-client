@@ -68,9 +68,11 @@ class MOIdentity extends MOClients implements IdentityInterface
                 'password_reset_token'  => $this->password_reset_token,
                 'verification_token'    => $this->verification_token,
             ];
+
             $options = $this->options;
             $options['identity'] = $identity;
             $this->options = $options;
+
         }
         return parent::beforeSave($insert);
     }
