@@ -82,6 +82,7 @@ class Component extends \yii\base\Component
                 'response' => json_decode($e->getResponse()->getBody(), true)
             ];
         }
+
         return $res;
     }
 }
