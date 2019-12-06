@@ -72,10 +72,15 @@ class Component extends \yii\base\Component
                 'headers' => $headers,
                 'form_params' => $values,
             ]);
-            $res = json_decode($response->getBody(), true);
+            $res = [
+                'status' => 'ok',
+                'response' => json_decode($response->getBody(), true)
+            ];
         }catch (RequestException $e){
-            $res = json_decode($e->getResponse()->getBody(), true);
-            return false;
+            $res = [
+                'status' => 'ok',
+                'response' => json_decode($e->getResponse()->getBody(), true)
+            ];
         }
         return $res;
     }

@@ -116,12 +116,33 @@ class MOActiveRecord extends BaseActiveRecord
         if (!$this->beforeSave(true)) {
             return false;
         }
+
         $values = $this->getDirtyAttributes($attributes);
 
+        $result = Yii::$app->megaofficeClient->insert(static::tableName(), $values);
 
+        if($result['status'] == 'ok'){
 
-        $record = Yii::$app->megaofficeClient->insert(static::tableName(), $values);
+            $record = $result['response'];
 
+            $this->setAttribute('id', $record['id']);
+
+            $changedAttributes = array_fill_keys(array_keys($values), null);
+            $this->setOldAttributes($values);
+            $this->afterSave(true, $changedAttributes);
+            return true;
+
+        }else{
+            $errors = $result['response'];
+            if(is_array($errors)){
+                foreach ($errors as $error){
+                    $this->addError('name', 'message');
+                }
+            }else{
+                $this->addError('megaoffice', $this->errors);
+            }
+            return false;
+        }
 //        if (($primaryKeys = static::getDb()->schema->insert(static::tableName(), $values)) === false) {
 //            return false;
 //        }
@@ -130,18 +151,7 @@ class MOActiveRecord extends BaseActiveRecord
 //            $this->setAttribute($name, $id);
 //            $values[$name] = $id;
 //        }
-        if($record){
-            $this->setAttribute('id', $record['id']);
 
-            $changedAttributes = array_fill_keys(array_keys($values), null);
-            $this->setOldAttributes($values);
-            $this->afterSave(true, $changedAttributes);
-
-            return true;
-
-        }
-
-        return false;
 
     }
 
