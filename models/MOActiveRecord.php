@@ -136,7 +136,7 @@ class MOActiveRecord extends BaseActiveRecord
             $errors = $result['response'];
             if(is_array($errors)){
                 foreach ($errors as $error){
-                    $this->addError('name', 'message');
+                    $this->addError($error['field'] ?? 'unknown', $error['message'] ?? '');
                 }
             }else{
                 $this->addError('megaoffice', $this->errors);
