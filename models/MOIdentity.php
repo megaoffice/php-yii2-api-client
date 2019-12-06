@@ -17,8 +17,6 @@ class MOIdentity extends MOClients implements IdentityInterface
     //public $options = [];
     public $phones  = [];
     public $emails  = [];
-    public $phone;
-    public $email;
 
     public $username;
     public $regStatus;
