@@ -76,7 +76,7 @@ class MOCommand extends Component
         $response = $client->request('GET', $url .'/'. $endpoint.$condString, [
             'headers' => $headers,
         ]);
-        $parsed = json_decode($response->getBody());
+        $parsed = json_decode($response->getBody(), true);
 
         if(is_array($parsed) && count($parsed) > 0){
             return  $parsed[0];
