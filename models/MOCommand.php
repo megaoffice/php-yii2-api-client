@@ -21,7 +21,7 @@ class MOCommand extends Component
             'Accept'        => 'application/json',
             'Cache-Control'        => '',
         ];
-        $condition = [];
+        $condition = $this->buildCondition();
 
         $delimiter = '?';
         $limit = '';
@@ -57,7 +57,7 @@ class MOCommand extends Component
             'Accept'        => 'application/json',
             'Cache-Control'        => '',
         ];
-        $condition = [];
+        $condition = $this->buildCondition();
 
         $delimiter = '&';
 
@@ -83,6 +83,10 @@ class MOCommand extends Component
         }
         return null;
 
+    }
+
+    protected function buildCondition(){
+        return $this->moQuery->where ?? [];
     }
 
 
