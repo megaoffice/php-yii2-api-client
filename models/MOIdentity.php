@@ -80,7 +80,7 @@ class MOIdentity extends MOClients implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'options.idenitity.regStatus' => self::STATUS_ACTIVE]);
+        return static::findOne(['id' => $id, 'options.idenitity.status' => self::STATUS_ACTIVE]);
     }
 
     /**
@@ -116,7 +116,7 @@ class MOIdentity extends MOClients implements IdentityInterface
 
         return static::findOne([
             'option.identity.password_reset_token' => $token,
-            'option.identity.regStatus' => self::STATUS_ACTIVE,
+            'option.identity.status' => self::STATUS_ACTIVE,
         ]);
     }
 
@@ -129,7 +129,7 @@ class MOIdentity extends MOClients implements IdentityInterface
     public static function findByVerificationToken($token) {
         return static::findOne([
             'option.identity.verification_token' => $token,
-            'option.identity.regStatus' => self::STATUS_INACTIVE
+            'option.identity.status' => self::STATUS_INACTIVE
         ]);
     }
 
