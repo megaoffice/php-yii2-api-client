@@ -24,6 +24,7 @@ class MOCommand extends Component
         $condition = [];
 
         $delimiter = '?';
+        $limit = '';
 
         if($this->moQuery->limit > 0){
             $limit = $delimiter.'per-page='.intval($this->moQuery->limit);
