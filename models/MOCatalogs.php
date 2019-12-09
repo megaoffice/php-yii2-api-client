@@ -10,6 +10,17 @@ class MOCatalogs extends MOActiveRecord
 {
     public static $tableName = 'catalogs';
 
+    public static $attrList = [
+      'id', 'options', 'type_id', 'created', 'actual',
+    ];
+
+    public function attributes()
+    {
+        return static::$attrList;
+    }
+
+
+
 //    public function __construct($config = [])
 //    {
 //

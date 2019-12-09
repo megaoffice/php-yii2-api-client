@@ -15,6 +15,26 @@ class MOActiveQuery extends MOQuery implements ActiveQueryInterface
     //use ActiveRelationTrait;
 
     /**
+     * Executes query and returns a single row of result.
+     * @param Connection|null $db the DB connection used to create the DB command.
+     * If `null`, the DB connection returned by [[modelClass]] will be used.
+     * @return MOActiveRecord|array|null a single row of query result. Depending on the setting of [[asArray]],
+     * the query result may be either an array or an ActiveRecord object. `null` will be returned
+     * if the query results in nothing.
+     */
+    public function one($db = null)
+    {
+        $row = parent::one($db);
+        if ($row !== false) {
+            $models = $this->populate([$row]);
+            return reset($models) ?: null;
+        }
+
+        return null;
+    }
+
+
+    /**
      * Executes query and returns all results as an array.
      * @param Connection $db the DB connection used to create the DB command.
      * If null, the DB connection returned by [[modelClass]] will be used.
@@ -60,4 +80,36 @@ class MOActiveQuery extends MOQuery implements ActiveQueryInterface
     {
         // TODO: Implement findFor() method.
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function populate($rows)
+    {
+        if (empty($rows)) {
+            return [];
+        }
+
+        $models = $this->createModels($rows);
+        if (!empty($this->join) && $this->indexBy === null) {
+            $models = $this->removeDuplicatedModels($models);
+        }
+        if (!empty($this->with)) {
+            $this->findWith($this->with, $models);
+        }
+
+//        if ($this->inverseOf !== null) {
+//            $this->addInverseRelations($models);
+//        }
+
+        if (!$this->asArray) {
+            foreach ($models as $model) {
+                $model->afterFind();
+            }
+        }
+
+        return parent::populate($models);
+    }
+
+
 }

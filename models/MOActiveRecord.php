@@ -10,7 +10,10 @@ use yii\db\BaseActiveRecord;
 class MOActiveRecord extends BaseActiveRecord
 {
 
-
+    public function attributes()
+    {
+        return static::$attrList;
+    }
 
     /**
      * Returns the primary key **name(s)** for this AR class.
@@ -23,8 +26,7 @@ class MOActiveRecord extends BaseActiveRecord
      */
     public static function primaryKey()
     {
-        $a = 5;
-        // TODO: Implement primaryKey() method.
+        return ['id'];
     }
 
     /**
@@ -168,4 +170,21 @@ class MOActiveRecord extends BaseActiveRecord
     {
         // TODO: Implement getDb() method.
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function populateRecord($record, $row)
+    {
+//        $columns = static::$attributes;
+//        foreach ($row as $name => $value) {
+//
+//
+//            if (isset($columns[$name])) {
+//                $row[$name] = $columns[$name]->phpTypecast($value);
+//            }
+//        }
+        parent::populateRecord($record, $row);
+    }
+
 }

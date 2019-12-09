@@ -10,6 +10,10 @@ class MODocuments extends MOActiveRecord
 {
     public static $tableName = 'documents';
 
+    public static $attrList = [
+        'id', 'type_id', 'status_id', 'deleted', 'uuid', 'options', 'created',
+    ];
+
 //    public function __construct($config = [])
 //    {
 //

@@ -10,4 +10,6 @@ class MOProducts
         $res = \Yii::$app->megaofficeClient->query('/catalog/products', $condition);
         return $res;
     }
+
+
 }
