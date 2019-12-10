@@ -81,7 +81,7 @@ class MOCommand extends Component
         if(is_array($parsed) && count($parsed) > 0){
             return  $parsed[0];
         }
-        return [];
+        return false;
 
     }
 
