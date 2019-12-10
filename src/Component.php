@@ -85,4 +85,32 @@ class Component extends \yii\base\Component
 
         return $res;
     }
+
+    public function update($id, $endpoint, $values){
+
+        $client = new Client();
+        $headers = [
+            'X-Api-Key'     => '' .$this->token,
+            'Accept'        => 'application/json',
+            'Cache-Control'        => '',
+        ];
+        try {
+            $response = $client->put($this->url . '/' . $endpoint.'/'.$id, [
+                'headers' => $headers,
+                'form_params' => $values,
+            ]);
+            $res = [
+                'status' => 'ok',
+                'response' => json_decode($response->getBody(), true)
+            ];
+        }catch (RequestException $e){
+            $res = [
+                'status' => 'error',
+                'response' => json_decode($e->getResponse()->getBody(), true)
+            ];
+        }
+
+        return $res;
+    }
+
 }

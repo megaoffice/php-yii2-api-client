@@ -16,13 +16,6 @@ class MOQuery extends Component implements QueryInterface
 {
     use QueryTrait;
 
-    const MO_ENDPOINT_CATALOGS          = 'catalogs';
-    const MO_ENDPOINT_CATEGORIES        = 'catalog/categories';
-    const MO_ENDPOINT_PRODUCTS          = 'catalog/products';
-    const MO_ENDPOINT_PRODUCT_TEMPLATES = 'catalog/product-templates';
-
-    const MO_ENDPOINT_DOCUMENTD         = 'documents';
-
 
     public $select;
 

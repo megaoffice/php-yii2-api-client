@@ -157,6 +157,74 @@ class MOActiveRecord extends BaseActiveRecord
 
     }
 
+    /**
+     * Updates the whole table using the provided attribute values and conditions.
+     *
+     * For example, to change the status to be 1 for all customers whose status is 2:
+     *
+     * ```php
+     * Customer::updateAll(['status' => 1], 'status = 2');
+     * ```
+     *
+     * > Warning: If you do not specify any condition, this method will update **all** rows in the table.
+     *
+     * Note that this method will not trigger any events. If you need [[EVENT_BEFORE_UPDATE]] or
+     * [[EVENT_AFTER_UPDATE]] to be triggered, you need to [[find()|find]] the models first and then
+     * call [[update()]] on each of them. For example an equivalent of the example above would be:
+     *
+     * ```php
+     * $models = Customer::find()->where('status = 2')->all();
+     * foreach ($models as $model) {
+     *     $model->status = 1;
+     *     $model->update(false); // skipping validation as no user input is involved
+     * }
+     * ```
+     *
+     * For a large set of models you might consider using [[ActiveQuery::each()]] to keep memory usage within limits.
+     *
+     * @param array $attributes attribute values (name-value pairs) to be saved into the table
+     * @param string|array $condition the conditions that will be put in the WHERE part of the UPDATE SQL.
+     * Please refer to [[Query::where()]] on how to specify this parameter.
+     * @param array $params the parameters (name => value) to be bound to the query.
+     * @return int the number of rows updated
+     */
+    public static function updateAll($attributes, $condition = null, $params = [])
+    {
+
+        $result = Yii::$app->megaofficeClient->update($condition['id'], static::tableName(), $attributes);
+
+        if($result['status'] == 'ok'){
+
+            $record = $result['response'];
+//
+//            $this->setAttribute('id', $record['id']);
+//
+//            $changedAttributes = array_fill_keys(array_keys($values), null);
+//            $this->setOldAttributes($values);
+//            $this->afterSave(true, $changedAttributes);
+            return $record;
+//
+        }else{
+//            $errors = $result['response'];
+//            if(is_array($errors)){
+//                foreach ($errors as $error){
+//                    $this->addError($error['field'] ?? 'unknown', $error['message'] ?? '');
+//                }
+//            }else{
+//                $this->addError('megaoffice', $this->errors);
+//            }
+            return false;
+        }
+
+
+
+        $command = static::getDb()->createCommand();
+        $command->update(static::tableName(), $attributes, $condition, $params);
+
+        return $command->execute();
+    }
+
+
     public function getPrimaryKey($asArray = false)
     {
         return $this->id;
