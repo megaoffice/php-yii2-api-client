@@ -80,7 +80,7 @@ class MOIdentity extends MOClients implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'options.idenitity.status' => self::STATUS_ACTIVE]);
+        return static::findOne(['id' => $id, 'option.identity.status' => self::STATUS_ACTIVE]);
     }
 
     /**
