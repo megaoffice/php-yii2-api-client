@@ -212,7 +212,7 @@ class MOIdentity extends MOClients implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        return \Yii::$app->security->validatePassword($password, $this->password_hash);
+        return \Yii::$app->security->validatePassword($password, $this->password_hash ?? $this->options['identity']['password_hash']);
     }
 
     /**
