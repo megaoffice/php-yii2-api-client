@@ -49,7 +49,7 @@ class Component extends \yii\base\Component
         $response = $client->request('GET', $this->url . $endpoint.$condString, [
             'headers' => $headers,
         ]);
-        return  json_decode($response->getBody(), true);
+        return  json_decode($response->getBody(), true) ?? [];
     }
 
     public function insert($endpoint, $values){

@@ -45,7 +45,7 @@ class MOCommand extends Component
         $response = $client->request('GET', $url .'/'. $endpoint.$condString, [
             'headers' => $headers,
         ]);
-        return  json_decode($response->getBody(), true);
+        return  json_decode($response->getBody(), true) ?? [];
 
     }
 
@@ -81,7 +81,7 @@ class MOCommand extends Component
         if(is_array($parsed) && count($parsed) > 0){
             return  $parsed[0];
         }
-        return null;
+        return [];
 
     }
 
