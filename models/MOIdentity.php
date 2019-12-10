@@ -103,6 +103,36 @@ class MOIdentity extends MOClients implements IdentityInterface
     }
 
     /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findByEmail($email)
+    {
+        return static::findOne([
+            'emails.value' => $email,
+            'emails.disabled' => false,
+            'option.identity.status' => self::STATUS_ACTIVE
+        ]);
+    }
+
+    /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findByPhone($phone)
+    {
+        return static::findOne([
+            'phones.value' => $phone,
+            'phones.disabled' => false,
+            'option.identity.status' => self::STATUS_ACTIVE
+        ]);
+    }
+
+    /**
      * Finds user by password reset token
      *
      * @param string $token password reset token
