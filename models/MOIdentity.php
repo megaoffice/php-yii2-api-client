@@ -111,8 +111,8 @@ class MOIdentity extends MOClients implements IdentityInterface
     public static function findByEmail($email)
     {
         return static::findOne([
-            'emails.value' => $email,
-            'emails.disabled' => false,
+            'email.value' => $email,
+            'email.disabled' => false,
             'option.identity.status' => self::STATUS_ACTIVE
         ]);
     }
@@ -126,8 +126,8 @@ class MOIdentity extends MOClients implements IdentityInterface
     public static function findByPhone($phone)
     {
         return static::findOne([
-            'phones.value' => $phone,
-            'phones.disabled' => false,
+            'phone.value' => $phone,
+            'phone.disabled' => false,
             'option.identity.status' => self::STATUS_ACTIVE
         ]);
     }
