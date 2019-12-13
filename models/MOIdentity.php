@@ -51,28 +51,33 @@ class MOIdentity extends MOClients implements IdentityInterface
 
     public function beforeSave($insert)
     {
+        $identity = [];
+        if($this->username !== null){$identity['username'] = $this->username;}
+        if($this->regStatus !== null){$identity['status'] = $this->regStatus;}
+        if($this->password_hash !== null){$identity['password_hash'] = $this->password_hash;}
+        if($this->auth_key !== null){$identity['auth_key'] = $this->auth_key;}
+        if($this->password_reset_token !== null){$identity['auth_key'] = $this->password_reset_token;}
+        if($this->verification_token !== null){$identity['auth_key'] = $this->verification_token;}
 
-        if(isset($this->password_hash) ||
-            isset($this->username) ||
-            isset($this->regStatus) ||
-            isset($this->auth_key) ||
-            isset($this->password_reset_token) ||
-            isset($this->verification_token)){
-            $identity = [
-                'username'              => $this->username,
-                'status'                => $this->regStatus,
-                'password_hash'         => $this->password_hash,
-                'auth_key'              => $this->auth_key,
-                'password_reset_token'  => $this->password_reset_token,
-                'verification_token'    => $this->verification_token,
-            ];
-
+        if(count($identity) > 0) {
             $options = $this->options;
             $options['identity'] = $identity;
             $this->options = $options;
-
         }
+
+
         return parent::beforeSave($insert);
+    }
+
+    public function afterFind()
+    {
+        $this->username             = $this->options['identity']['username'] ?? $this->username;
+        $this->regStatus            = $this->options['identity']['status'] ?? $this->regStatus;
+        $this->password_hash        = $this->options['identity']['password_hash'] ?? $this->password_hash;
+        $this->auth_key             = $this->options['identity']['auth_key'] ?? $this->auth_key;
+        $this->password_reset_token = $this->options['identity']['password_reset_token'] ?? $this->password_reset_token;
+        $this->verification_token   = $this->options['identity']['verification_token'] ?? $this->verification_token;
+        parent::afterFind();
     }
 
     /**
