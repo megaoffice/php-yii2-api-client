@@ -56,8 +56,8 @@ class MOIdentity extends MOClients implements IdentityInterface
         if($this->regStatus !== null){$identity['status'] = $this->regStatus;}
         if($this->password_hash !== null){$identity['password_hash'] = $this->password_hash;}
         if($this->auth_key !== null){$identity['auth_key'] = $this->auth_key;}
-        if($this->password_reset_token !== null){$identity['auth_key'] = $this->password_reset_token;}
-        if($this->verification_token !== null){$identity['auth_key'] = $this->verification_token;}
+        if($this->password_reset_token !== null){$identity['password_reset_token'] = $this->password_reset_token;}
+        if($this->verification_token !== null){$identity['verification_token'] = $this->verification_token;}
 
         if(count($identity) > 0) {
             $options = $this->options;
