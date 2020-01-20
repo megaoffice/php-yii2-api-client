@@ -110,11 +110,17 @@ class MOIdentity extends MOClients implements IdentityInterface
     /**
      * Finds user by username
      *
-     * @param string $username
-     * @return static|null
+     * @param string $email
+     * @return array|MOActiveRecord|static
      */
-    public static function findByEmail($email)
+    public static function findByEmail($email, $ignoreCase = false)
     {
+        if($ignoreCase){
+            return static::find()->where([
+                'email.disabled' => false,
+                'option.identity.status' => self::STATUS_ACTIVE
+            ])->andWhere(['ILIKE', 'email.value', $email])->one();
+        }
         return static::findOne([
             'email.value' => $email,
             'email.disabled' => false,
