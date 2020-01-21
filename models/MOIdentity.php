@@ -117,9 +117,10 @@ class MOIdentity extends MOClients implements IdentityInterface
     {
         if($ignoreCase){
             return static::find()->where([
+                'email.value' => $email,
                 'email.disabled' => false,
                 'option.identity.status' => self::STATUS_ACTIVE
-            ])->andWhere(['ILIKE', 'email.value', $email])->one();
+            ])->one();
         }
         return static::findOne([
             'email.value' => $email,
