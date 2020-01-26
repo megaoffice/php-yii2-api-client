@@ -14,11 +14,15 @@ class MODocuments extends MOActiveRecord
         'id', 'type_id', 'status_id', 'deleted', 'uuid', 'options', 'created',
     ];
 
-//    public function __construct($config = [])
-//    {
-//
-//        parent::__construct($config);
-//    }
+    public function rules()
+    {
+        return [
+            ['type_id', 'in', 'range' => [1, 2]],
+            ['options', 'safe'],
+            ['status_id', 'safe'],
+            ['deleted', 'boolean'],
+        ];
+    }
 
     use NestedStructuresTrait;
 
