@@ -15,10 +15,6 @@ class Component extends \yii\base\Component
     public $url = 'https://api.megaoffice.pro';
 
 
-    public function test() {
-        $a = 5;
-    }
-
     /**
      * @param $endpoint
      * @param $condition
