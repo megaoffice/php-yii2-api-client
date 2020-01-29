@@ -14,14 +14,7 @@ class Component extends \yii\base\Component
     public $pageSize = 20;
     public $url = 'https://api.megaoffice.pro';
 
-//    public function init()
-//    {
-////        if(\Yii::$app->params['domain'] ?? false){
-////            $this->url      = 'http://api.balance.loc';
-////            $this->token    = 'testoken';
-////        }
-//        parent::init();
-//    }
+
     public function test() {
         $a = 5;
     }
