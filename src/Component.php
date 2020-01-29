@@ -16,10 +16,10 @@ class Component extends \yii\base\Component
 
     public function init()
     {
-        if(\Yii::$app->params['domain'] ?? false){
-            $this->url      = 'http://api.balance.loc';
-            $this->token    = 'testoken';
-        }
+//        if(\Yii::$app->params['domain'] ?? false){
+//            $this->url      = 'http://api.balance.loc';
+//            $this->token    = 'testoken';
+//        }
         parent::init();
     }
     public function test() {
