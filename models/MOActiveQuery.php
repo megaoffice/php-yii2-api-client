@@ -33,7 +33,6 @@ class MOActiveQuery extends MOQuery implements ActiveQueryInterface
         return null;
     }
 
-
     /**
      * Executes query and returns all results as an array.
      * @param Connection $db the DB connection used to create the DB command.
