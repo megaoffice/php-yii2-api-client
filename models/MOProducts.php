@@ -12,7 +12,7 @@ namespace megaoffice\client\models;
  * @property integer $type_id;
  * @property array $options;
  */
-class MOProducts
+class MOProducts extends MOActiveRecord
 {
     public static function getAll($condition = null){
         $res = \Yii::$app->megaofficeClient->query('/catalog/products', $condition);
