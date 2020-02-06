@@ -22,7 +22,7 @@ class MOProducts extends MOActiveRecord
     public static $tableName = 'catalog/products';
 
     public static $attrList = [
-        'id', 'catalog_id', 'type_id', 'options',
+        'id', 'category_id', 'type_id', 'options',
     ];
 
     public static function tableName(){
