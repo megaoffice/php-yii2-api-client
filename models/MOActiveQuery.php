@@ -68,6 +68,18 @@ class MOActiveQuery extends MOQuery implements ActiveQueryInterface
         // TODO: Implement via() method.
     }
 
+    public function with()
+    {
+        $with = func_get_args();
+        if (isset($with[0]) && is_array($with[0])) {
+            // the parameter is given as an array
+            $with = $with[0];
+        }
+        $this->with = $with;
+
+        return $this;
+    }
+
     /**
      * Finds the related records for the specified primary record.
      * This method is invoked when a relation of an ActiveRecord is being accessed in a lazy fashion.
