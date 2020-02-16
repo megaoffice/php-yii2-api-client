@@ -122,5 +122,10 @@ class MOActiveQuery extends MOQuery implements ActiveQueryInterface
         return parent::populate($models);
     }
 
+    public function findWith($with, &$models)
+    {
+
+    }
+
 
 }
