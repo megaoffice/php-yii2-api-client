@@ -31,13 +31,23 @@ class MOCommand extends Component
             $delimiter = '&';
         }
 
+        $with = '';
+        if(isset($this->moQuery->with)){
+            if(is_array($this->moQuery->with)){
+                $withArray = $this->moQuery->with;
+            }else{
+                $withArray = [$this->moQuery->with];
+            }
+            $with =  $limit.$delimiter.'with='.json_encode($withArray);
+            $delimiter = '&';
+        }
 
         if(is_array($condition) && count($condition)>0){
-            $condString = $limit.$delimiter.'filter='.json_encode($condition);
+            $condString = $with.$delimiter.'filter='.json_encode($condition);
         }else if(is_string($condition) && strlen($condition) > 0){
-            $condString = $limit.$delimiter.'filter='.$condition;
+            $condString = $with.$delimiter.'filter='.$condition;
         }else{
-            $condString = $limit.$delimiter;
+            $condString = $with.$delimiter;
         }
         $endpoint = $this->moQuery->modelClass::tableName();
         $url = \Yii::$app->megaofficeClient->url;
@@ -63,12 +73,24 @@ class MOCommand extends Component
 
         $limit = '?per-page=1';
 
+        $with = '';
+        if(isset($this->moQuery->with)){
+            if(is_array($this->moQuery->with)){
+                $withArray = $this->moQuery->with;
+            }else{
+                $withArray = [$this->moQuery->with];
+            }
+            $with =  $limit.$delimiter.'with='.json_encode($withArray);
+            $delimiter = '&';
+        }
+
+
         if(is_array($condition) && count($condition)>0){
-            $condString = $limit.$delimiter.'filter='.json_encode($condition);
+            $condString = $with.$delimiter.'filter='.json_encode($condition);
         }else if(is_string($condition) && strlen($condition) > 0){
-            $condString = $limit.$delimiter.'filter='.$condition;
+            $condString = $with.$delimiter.'filter='.$condition;
         }else{
-            $condString = $limit.$delimiter;
+            $condString = $with.$delimiter;
         }
         $endpoint = $this->moQuery->modelClass::tableName();
         $url = \Yii::$app->megaofficeClient->url;
