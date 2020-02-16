@@ -14,7 +14,7 @@ class MOCatalogCategories extends MOActiveRecord
     public static $tableName = 'catalog/categories';
 
     public static $attrList = [
-        'id', 'catalog_id', 'parent_id', 'name','descr','disabled',  'options',
+        'id', 'catalog_id', 'parent_id', 'name','descr','disabled',  'options', 'products'
     ];
 
     public static function tableName(){
