@@ -4,8 +4,28 @@
 namespace megaoffice\client\models;
 
 
+use common\traits\RecursiveListTrait;
+
+/**
+ *
+ * @property int $id
+ * @property int $catalog_id
+ * @property int $parent_id
+ * @property string $name
+ * @property string $descr
+ * @property string $options
+ * @property bool $disabled
+ * @property string $created
+ *
+ * @property  $items
+ * @property  $products
+ *
+ */
 class MOCatalogCategories extends MOActiveRecord
 {
+    use RecursiveListTrait;
+    public $items;
+
     public static function getAll($condition = null){
         $res = \Yii::$app->megaofficeClient->query('/catalog/categories', $condition);
         return $res;
