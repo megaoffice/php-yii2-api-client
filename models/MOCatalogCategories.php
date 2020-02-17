@@ -4,7 +4,8 @@
 namespace megaoffice\client\models;
 
 
-use common\traits\RecursiveListTrait;
+
+use megaoffice\client\traits\NestedStructuresTrait;
 
 /**
  *
@@ -23,7 +24,7 @@ use common\traits\RecursiveListTrait;
  */
 class MOCatalogCategories extends MOActiveRecord
 {
-    use RecursiveListTrait;
+    use NestedStructuresTrait;
     public $items;
 
     public static function getAll($condition = null){
