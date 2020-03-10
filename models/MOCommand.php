@@ -69,8 +69,6 @@ class MOCommand extends Component
         ];
         $condition = $this->buildCondition();
 
-        $delimiter = '?';
-
         $limit = '?per-page=1';
 
         $with = $limit;
@@ -81,16 +79,15 @@ class MOCommand extends Component
                 $withArray = [$this->moQuery->with];
             }
             $with =  $limit.'&with='.json_encode($withArray);
-            $delimiter = '&';
         }
 
 
         if(is_array($condition) && count($condition)>0){
-            $condString = $with.$delimiter.'filter='.json_encode($condition);
+            $condString = $with.'&filter='.json_encode($condition);
         }else if(is_string($condition) && strlen($condition) > 0){
-            $condString = $with.$delimiter.'filter='.$condition;
+            $condString = $with.'&filter='.$condition;
         }else{
-            $condString = $with.$delimiter;
+            $condString = $with;
         }
         $endpoint = $this->moQuery->modelClass::tableName();
         $url = \Yii::$app->megaofficeClient->url;
