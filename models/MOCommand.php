@@ -69,18 +69,18 @@ class MOCommand extends Component
         ];
         $condition = $this->buildCondition();
 
-        $delimiter = '&';
+        $delimiter = '?';
 
         $limit = '?per-page=1';
 
-        $with = '';
+        $with = $limit;
         if(isset($this->moQuery->with)){
             if(is_array($this->moQuery->with)){
                 $withArray = $this->moQuery->with;
             }else{
                 $withArray = [$this->moQuery->with];
             }
-            $with =  $limit.$delimiter.'with='.json_encode($withArray);
+            $with =  $limit.'&with='.json_encode($withArray);
             $delimiter = '&';
         }
 
