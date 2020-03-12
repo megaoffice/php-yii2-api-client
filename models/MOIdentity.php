@@ -17,6 +17,7 @@ class MOIdentity extends MOClients implements IdentityInterface
     //public $options = [];
     public $phones  = [];
     public $emails  = [];
+    public $addresses  = [];
 
     public $username;
     public $regStatus;
@@ -39,6 +40,8 @@ class MOIdentity extends MOClients implements IdentityInterface
             ['email', 'safe'],
             ['phones', 'safe'],
             ['phone', 'safe'],
+            ['addresses', 'safe'],
+            ['address', 'safe'],
             ['password_hash', 'safe'],
             ['auth_key', 'safe'],
             ['password_rewset_token', 'safe'],

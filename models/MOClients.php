@@ -15,7 +15,7 @@ class MOClients extends MOActiveRecord
     public static $tableName = 'clients';
 
     public static $attrList = [
-        'id', 'type', 'status', 'source',  'options', 'email', 'phone',
+        'id', 'type', 'status', 'source',  'options', 'email', 'phone','address',
     ];
 
 
