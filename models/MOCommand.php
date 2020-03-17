@@ -38,21 +38,20 @@ class MOCommand extends Component
             }else{
                 $withArray = [$this->moQuery->with];
             }
-            $with =  $limit.$delimiter.'with='.json_encode($withArray);
+            $with =  $delimiter.'with='.json_encode($withArray);
             $delimiter = '&';
         }
-
+        $condString = '';
         if(is_array($condition) && count($condition)>0){
             $condString = $with.$delimiter.'filter='.json_encode($condition);
         }else if(is_string($condition) && strlen($condition) > 0){
             $condString = $with.$delimiter.'filter='.$condition;
-        }else{
-            $condString = $with.$delimiter;
         }
+
         $endpoint = $this->moQuery->modelClass::tableName();
         $url = \Yii::$app->megaofficeClient->url;
 
-        $response = $client->request('GET', $url .'/'. $endpoint.$condString, [
+        $response = $client->request('GET', $url .'/'. $endpoint.$limit.$with.$condString, [
             'headers' => $headers,
         ]);
         return  json_decode($response->getBody(), true) ?? [];
