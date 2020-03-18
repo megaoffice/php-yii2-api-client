@@ -8,20 +8,18 @@ namespace megaoffice\client\models;
  * @package megaoffice\client\models
  *
  * @property integer $id;
- * @property integer $promo_id;
- * @property string $code;
- * @property bool $active;
- * @property string $valid_to;
- * @property integer $uses;
- * @property integer $max_uses;
+ * @property integer $type_id;
+ * @property bool $disabled;
+ * @property string $created;
+ * @property string $updated;
  * @property array $options;
  */
-class MOPromocodes extends MOActiveRecord
+class MOPromo extends MOActiveRecord
 {
     public static $tableName = 'promo/codes';
 
     public static $attrList = [
-        'id', 'promo_id', 'code', 'active', 'valid_to', 'uses', 'max_uses', 'options',
+        'id', 'type_id', 'disabled', 'created', 'updated', 'options',
     ];
 
     public static function tableName(){
