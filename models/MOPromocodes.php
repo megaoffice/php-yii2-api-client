@@ -21,7 +21,7 @@ class MOPromocodes extends MOActiveRecord
     public static $tableName = 'promo/codes';
 
     public static $attrList = [
-        'id', 'promo_id', 'code', 'active', 'valid_to', 'uses', 'max_uses', 'options',
+        'id', 'promo_id', 'code', 'promo',  'active', 'valid_to', 'uses', 'max_uses', 'options',
     ];
 
     public static function tableName(){
