@@ -102,4 +102,34 @@ class Component extends \yii\base\Component
         return $res;
     }
 
+    public function applyPromocode($sale, $promocode){
+        $client = new Client();
+        $headers = [
+            'X-Api-Key'     => '' .$this->token,
+            'Accept'        => 'application/json',
+            'Cache-Control'        => '',
+        ];
+        try {
+            $response = $client->post($this->url . '/promo/code/apply-to-sale', [
+                'headers' => $headers,
+                'form_params' => [
+                    'sale' => is_object($sale) ? $sale->toArray() : $sale,
+                    'code' => $promocode,
+                    ],
+            ]);
+            $res = [
+                'status' => 'ok',
+                'response' => json_decode($response->getBody(), true)
+            ];
+        }catch (RequestException $e){
+            $res = [
+                'status' => 'error',
+                'response' => json_decode($e->getResponse()->getBody(), true)
+            ];
+        }
+
+        return $res;
+
+    }
+
 }
