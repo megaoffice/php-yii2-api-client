@@ -22,7 +22,8 @@ class MOPromocodes extends MOActiveRecord
 
     protected static $errorCodes = [
         0 => 'No Errors',
-        2 => 'No products fiund for this Promo code',
+        1 => 'Promo code not found',
+        2 => 'No products found for this Promo code',
         3 => 'Promo code has already been used',
         4 => 'Too early to use this promo code',
         5 => 'Too late to use this promo code',
