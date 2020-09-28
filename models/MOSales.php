@@ -64,7 +64,7 @@ class MOSales extends MOActiveRecord
             $this->status_id = 0;
         }
        if(empty($this->buyer_type)){
-            $this->buyer_type = 1;
+            $this->buyer_type = 0;
         }
         parent::init();
     }
