@@ -14,6 +14,8 @@ namespace megaoffice\client\models;
  * @property integer $buyer_type;
  * @property integer $buyer_id;
  * @property integer $source;
+ * @property integer $location;
+ * @property array   $address;
  * @property array   $options;
  * @property array   $items;
  * @property array   $deliveries;
@@ -31,10 +33,11 @@ class MOSales extends MOActiveRecord
     public $promoId;
     public $promoError;
 
+
     public static $tableName = 'sales';
 
     public static $attrList = [
-        'id', 'type_id', 'status_id','seller_id', 'buyer_type',
+        'id', 'type_id', 'status_id','seller_id', 'buyer_type', 'address', 'location_id',
         'buyer_id', 'source',  'options', 'items', 'deliveries', 'actual',
     ];
 
