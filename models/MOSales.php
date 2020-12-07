@@ -24,6 +24,7 @@ namespace megaoffice\client\models;
  * @property string  $currency;
  * @property string  $promoId;
  * @property string  $promoError;
+ * @property integer  $promoCodeId;
  *
  */
 class MOSales extends MOActiveRecord
@@ -38,7 +39,7 @@ class MOSales extends MOActiveRecord
 
     public static $attrList = [
         'id', 'type_id', 'status_id','seller_id', 'buyer_type', 'address', 'location_id',
-        'time_from', 'time_to', 'create_deliveries',
+        'time_from', 'time_to', 'create_deliveries', 'promoCodeId',
         'buyer_id', 'source',  'options', 'items', 'deliveries', 'actual',
     ];
 
